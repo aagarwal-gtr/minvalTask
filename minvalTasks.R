@@ -19,7 +19,8 @@ if(!require(CHNOSZ)) {
   library(CHNOSZ)
 }
 
-#function to calculate formal charge
+#function to calculate formal charge of a compound
+#incomplete because cannot calculate without knowing lewis structure
 formalCharge <- function(metabolite) {
   formula <- chebi.formula(metabolite) #conver named compound to its formula
   makeup <- as.data.frame(t(makeup(formula))) #convert makeup split of compound to data frame
@@ -27,5 +28,12 @@ formalCharge <- function(metabolite) {
   
   return(charge)
 }
-chebi.formula("ATP")
 formalCharge("ATP")
+
+#function to calculate formal charge assuming number of valence electrons, non bonding electrons, bonding electrons
+#for a atomic species in a compound
+formalCharge1 <- function(v, nb, b) {
+  charge <- v - nb - (b/2)
+  return(charge)
+}
+formalCharge1(5, 2, 3)
